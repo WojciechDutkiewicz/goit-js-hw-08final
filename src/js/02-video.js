@@ -5,10 +5,7 @@ const iframe = document.querySelector('iframe');
 
 const player = new Player(iframe);
 
-// zapis lub aktualizacja w lokalnej pamięci istniejącego czasu video
-// setItem(key, value)
 const savePlayerTime = throttle(data => {
-  // console.log(data.seconds);
   localStorage.setItem('videoplayer-current-time', data.seconds), 1000;
 });
 
@@ -26,12 +23,11 @@ player.getVideoTitle().then(function (title) {
 });
 player.on('ended', endPlayerTime);
 
-// odczyt zapisanego czasu video z lokalnej pamięci
 const getLocalTime = () => {
   const savedTime = localStorage.getItem('videoplayer-current-time');
   if (savedTime === 0) return 0;
 
-  const parsedTime = JSON.parse(savedTime); // zmniejszamy(sprasowujemy) dane czasu zapisanego w lokalnej pamięci
+  const parsedTime = JSON.parse(savedTime);
   return Number(parsedTime);
 };
 
